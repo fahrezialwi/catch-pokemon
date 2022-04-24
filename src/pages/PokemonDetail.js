@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button } from "reactstrap";
 import { gql, useQuery } from "@apollo/client";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 const MySwal = withReactContent(Swal)
 
@@ -41,11 +41,11 @@ const PokemonDetail = () => {
   const [pokemonTypes, setPokemonTypes] = useState([]);
   const [pokemonAbilities, setPokemonAbilities] = useState([]);
   const [pokemonMoves, setPokemonMoves] = useState([]);
-  const [isCatching,setIsCatching] = useState(false);
+  const [isCatching, setIsCatching] = useState(false);
 
   const { name } = useParams();
   const navigate = useNavigate();
-  
+
   const convertUpperCase = (value) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
   };
@@ -65,11 +65,7 @@ const PokemonDetail = () => {
   });
 
   useEffect(() => {
-    if (loading) {
-      // console.log(loading)
-    } else if (error) {
-      console.error(error);
-    } else {
+    if (!loading) {
       setPokemonId(data.pokemon.id);
       setPokemonName(data.pokemon.name);
       setPokemonImage(data.pokemon.sprites.front_default);
@@ -78,12 +74,12 @@ const PokemonDetail = () => {
         data.pokemon.abilities.map((values) => values.ability.name)
       );
       setPokemonMoves(data.pokemon.moves.map((values) => values.move.name));
-    }
+    } 
+    
+    if (error) {
+      console.error(error);
+    } 
   }, [loading, error, data]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
 
   const catchPokemon = () => {
     setIsCatching(true)
@@ -199,6 +195,7 @@ const PokemonDetail = () => {
                 onClick={() => catchPokemon(pokemonName)}
                 color="success"
                 className="mt-4"
+                data-testid="button-catch"
               >
                 {isCatching ? 'Catching...' : 'Catch Pokemon'}
               </Button>
@@ -223,9 +220,69 @@ const PokemonDetail = () => {
     return (
       <div className="App">
         <Container>
-          <Row className="mt-5">
-            <Col>
-              Loading...
+          <Row>
+            <Col md="6" sm="12">
+            <div style={{'height': '400px', 'paddingTop': '200px'}}>
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </div> 
+            </Col>
+            <Col md="6" sm="12" style={{'marginTop': '100px', 'marginBottom': '50px'}}>
+              <h2>
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              </h2>
+              <div>Pokemon ID&nbsp;
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              </div>
+              <Button
+                onClick={() => catchPokemon(pokemonName)}
+                color="success"
+                className="mt-4"
+                data-testid="button-catch"
+              >
+                {isCatching ? 'Catching...' : 'Catch Pokemon'}
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col md="12" className="mb-2"><h5>Types</h5></Col>
+            <Col md="12">
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md="12" className="mt-3 mb-2"><h5>Abilities</h5></Col>
+            <Col md="12">
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md="12" className="mt-3 mb-2"><h5>Moves</h5></Col>
+            <Col md="12">
+              <span
+                className="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              />
             </Col>
           </Row>
         </Container>

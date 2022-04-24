@@ -1,5 +1,5 @@
-import React from 'react';
-import { Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import React from "react";
+import { Col, Card, CardBody, CardTitle, CardText } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
 function PokemonCard({ pokemon }) {
@@ -10,10 +10,9 @@ function PokemonCard({ pokemon }) {
   };
 
   const getTotalOwned = () => {
-    const myPokemon = JSON.parse(localStorage.getItem("pokemon_data"));
-    const selectPokemon = myPokemon.filter(
-      (value) => value.id === pokemon.id
-    );
+    const myPokemon = JSON.parse(localStorage.getItem("pokemon_data")) ? 
+      JSON.parse(localStorage.getItem("pokemon_data")) : [];
+    const selectPokemon = myPokemon.filter((value) => value.id === pokemon.id);
     return selectPokemon.length;
   };
 
@@ -38,6 +37,5 @@ function PokemonCard({ pokemon }) {
     </Col>
   )
 }
-
 
 export default PokemonCard;

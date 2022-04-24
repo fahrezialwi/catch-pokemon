@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Container, Row, Col } from 'reactstrap';
-import MyPokemonCard from '../components/MyPokemonCard'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import React, { useState } from "react";
+import { Container, Row, Col } from "reactstrap";
+import MyPokemonCard from "../components/MyPokemonCard"
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 const MySwal = withReactContent(Swal)
 

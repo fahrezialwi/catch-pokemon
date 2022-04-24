@@ -1,5 +1,5 @@
-import React from 'react';
-import { Col, Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
+import React from "react";
+import { Col, Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 
 function MyPokemonCard({ pokemon, releasePokemon }) {
 
@@ -34,6 +34,5 @@ function MyPokemonCard({ pokemon, releasePokemon }) {
     </Col>
   )
 }
-
 
 export default MyPokemonCard;
